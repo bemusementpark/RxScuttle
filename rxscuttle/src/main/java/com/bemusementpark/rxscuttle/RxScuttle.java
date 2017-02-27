@@ -155,6 +155,7 @@ public class RxScuttle {
         @Override
         public void onActivityDestroyed(@NonNull Activity activity) {
             subject.onNext(DESTROY);
+            subject.onComplete();
             application.unregisterActivityLifecycleCallbacks(this);
         }
     }
