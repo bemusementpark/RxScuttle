@@ -1,7 +1,8 @@
 # RxScuttle
-Scuttle RxJava Subs(criptions) on Activity lifecycle callbacks
+## **Scuttle RxJava Subs**(criptions) on Activity lifecycle callbacks
+### *no Activity extension required!*
 
-The simplest way to use RxScuttle is to extend RxActivity:
+Although you don't have to, the simplest way to use RxScuttle is to extend `RxActivity`:
 
 ```
 public class MainActivity extends RxActivity {
@@ -14,11 +15,11 @@ public class MainActivity extends RxActivity {
                 .subscribe();
 ```
 
-Calls to `lifecycle()` will "intuit" the `Activity`s lifecycle and will emit when that scope is ended.
+Calls to `lifecycle()` will "intuit" the `Activity`s lifecycle (at the time it is called!!!) and will emit when that scope is ended.
 
-For more control you can just `takeUntil(pauses()`, `stops()` or `destroys())`
+For fine-grained control use `takeUntil(pauses()`, `stops()` or `destroys())`
 
-If you can't extend `RxActivity` then you can use `RxScuttle` via some handy helper methods:
+If you can't extend `RxActivity`, or if you just don't think it's cool, then you can use `RxScuttle` via some handy helper methods:
 
 ```
 public class MainActivity extends RxActivity {
@@ -46,9 +47,17 @@ public class MainActivity extends RxActivity {
 .takeUntil(pauses(this))
 ```
 
-...and if you want to listen to other events (create, start and resume) then grab an `RxScuttle` yourself via:
+## Other Events
+
+If you want to listen to other events (create, start and resume) then grab an `RxScuttle` yourself via:
 
 ```
 RxScuttle scuttle = RxScuttle.with(activity);
 scuttle.events(Event.CREATE);
 ```
+
+If you want more then use [RxBinding](https://github.com/JakeWharton/RxBinding)
+
+### Inspiration
+
+Inspired by [RxLifecycle](https://github.com/trello/RxLifecycle), the high method count, and [this issue](https://github.com/trello/RxLifecycle/issues/93).
