@@ -1,6 +1,6 @@
 # RxScuttle
 ## **Scuttle RxJava Subs**(criptions) on Activity lifecycle callbacks
-### *no Activity extension required!*
+### *No Activity extension required!*
 
 Although you don't have to, the simplest way to use RxScuttle is to extend `RxActivity`:
 
