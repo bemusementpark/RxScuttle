@@ -1,6 +1,6 @@
 # RxScuttle
-## **Scuttle RxJava Subs**(criptions) on Activity lifecycle callbacks
-### *No Activity extension required!*
+## Scuttle RxJava Sub(scription)s on Activity lifecycle callbacks
+### *No Activity subclassing required!*
 
 Although you don't have to, the simplest way to use RxScuttle is to extend `RxActivity`:
 
@@ -9,13 +9,14 @@ public class MainActivity extends RxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate");
+        // and use takeUntil to end complete the Observable on the desired lifecycle method
+        // or using lifecycle() to infer the corresponding closing lifecycle method to the current scope.
         Observable.interval(5, TimeUnit.SECONDS)
                 .takeUntil(lifecycle())
                 .subscribe();
 ```
 
-Calls to `lifecycle()` will "intuit" the `Activity`s lifecycle (at the time it is called!!!) and will emit when that scope is ended.
+Calls to `lifecycle()` will infer the `Activity`s lifecycle (at the time of subscription) and will emit when that scope is ended.
 
 For fine-grained control use `takeUntil(pauses()`, `stops()` or `destroys())`
 
@@ -55,8 +56,6 @@ If you want to listen to other events (create, start and resume) then grab an `R
 RxScuttle scuttle = RxScuttle.with(activity);
 scuttle.events(Event.CREATE);
 ```
-
-If you want more then use [RxBinding](https://github.com/JakeWharton/RxBinding)
 
 ### Inspiration
 
