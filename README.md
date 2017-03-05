@@ -9,8 +9,8 @@ public class MainActivity extends RxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // and use takeUntil to end complete the Observable on the desired lifecycle method
-        // or using lifecycle() to infer the corresponding closing lifecycle method to the current scope.
+        // and use takeUntil to end complete the Observable on the desired lifecycle method or
+        // use lifecycle() to infer the corresponding closing lifecycle method to the current scope.
         Observable.interval(5, TimeUnit.SECONDS)
                 .takeUntil(lifecycle())
                 .subscribe();
